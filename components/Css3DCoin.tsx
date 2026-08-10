@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 
 interface Css3DCoinProps {
@@ -7,38 +6,42 @@ interface Css3DCoinProps {
 }
 
 export default function Css3DCoin({ className = '' }: Css3DCoinProps) {
-  // Generate 30 ultra-thin layers to create smooth 3D thickness
-  const edgeLayers = 30;
-  const thickness = 12; // Positive and negative max Z-translation
+  // Generate 35 ultra-thin layers to create smooth 3D thickness
+  const edgeLayers = 35;
+  const thickness = 14; 
 
   return (
-    <div className={`relative w-48 h-48 [perspective:1200px] ${className}`}>
+    <div className={`relative w-48 h-48 [perspective:1500px] flex items-center justify-center ${className}`}>
       
-      {/* Dynamic floor shadow - Anchors the slanted coin */}
+      {/* Dynamic floor shadow */}
       <div 
-        className="absolute bottom-[-30px] left-1/2 -translate-x-1/2 w-48 h-16 bg-black/60 filter blur-[20px] rounded-[50%]"
-        style={{ animation: 'pulse-shadow 4s ease-in-out infinite' }}
+        className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-48 h-12 bg-black/80 filter blur-[20px] rounded-[50%]"
+        style={{ animation: 'pulse-shadow 5s ease-in-out infinite' }}
       />
 
-      {/* Main Slanted Container - creates the tilt */}
+      {/* Floating Particles in 3D Space */}
+      <div className="absolute inset-[-60px] pointer-events-none [transform-style:preserve-3d] z-0">
+         <div className="absolute top-1/2 left-1/2 w-1.5 h-1.5 bg-yellow-300 rounded-full blur-[1px] shadow-[0_0_15px_#facc15]" style={{ animation: 'particle-orbit 6s linear infinite', transformOrigin: '0px 120px' }} />
+         <div className="absolute top-1/2 left-1/2 w-2 h-2 bg-blue-300 rounded-full blur-[1px] shadow-[0_0_15px_#60a5fa]" style={{ animation: 'particle-orbit 8s linear infinite reverse', transformOrigin: '90px -60px' }} />
+      </div>
+
+      {/* Main Slanted Container */}
       <div 
-        className="w-full h-full relative [transform-style:preserve-3d]"
-        style={{ transform: 'rotateZ(-45deg) rotateX(15deg)' }}
+        className="w-full h-full relative [transform-style:preserve-3d] z-10"
+        style={{ transform: 'rotateZ(-45deg) rotateX(25deg)' }}
       >
-        
         {/* Ambient back glow hitting the tilted coin */}
         <div 
-          className="absolute inset-0 rounded-full bg-orange-500/30 filter blur-[30px]"
-          style={{ transform: 'translateZ(-40px)' }}
+          className="absolute inset-0 rounded-full bg-yellow-500/20 filter blur-[40px]"
+          style={{ transform: 'translateZ(-50px)' }}
         />
 
-        {/* The Spinning Coin Object (Rotates on Y axis, which looks diagonal due to Z rotation) */}
+        {/* The Spinning Coin Object */}
         <div 
           className="w-full h-full absolute inset-0 [transform-style:preserve-3d]"
-          style={{ animation: 'spin-y 5s linear infinite' }}
+          style={{ animation: 'spin-y 7s cubic-bezier(0.4, 0, 0.2, 1) infinite' }}
         >
-          
-          {/* Edge Layers (The ribbed metallic thickness of the coin) */}
+          {/* Edge Layers (Ribbed metallic thickness) */}
           {Array.from({ length: edgeLayers }).map((_, i) => {
             const zOffset = (i / (edgeLayers - 1)) * (thickness * 2) - thickness;
             return (
@@ -47,8 +50,7 @@ export default function Css3DCoin({ className = '' }: Css3DCoinProps) {
                 className="absolute inset-0 rounded-full pointer-events-none"
                 style={{ 
                   transform: `translateZ(${zOffset}px)`,
-                  // Repeating conic gradient creates highly realistic ribbed metallic edges
-                  background: 'repeating-conic-gradient(from 0deg, #d4af37 0deg 2deg, #8b6508 2deg 4deg, #b8860b 4deg 6deg)',
+                  background: 'repeating-conic-gradient(from 0deg, #d4af37 0deg 2deg, #8b6508 2deg 4deg, #b8860b 4deg 5deg, #fcd34d 5deg 6deg)',
                 }}
               />
             );
@@ -56,27 +58,30 @@ export default function Css3DCoin({ className = '' }: Css3DCoinProps) {
 
           {/* Front Face */}
           <div 
-            className="absolute inset-0 rounded-full flex items-center justify-center border-[3px] border-[#8b6508] overflow-hidden"
+            className="absolute inset-0 rounded-full flex items-center justify-center border-[4px] border-[#a67c00] overflow-hidden"
             style={{ 
               transform: `translateZ(${thickness + 0.5}px)`, 
-              background: 'radial-gradient(ellipse at center, #ffe066 0%, #d4af37 60%, #a67c00 100%)',
-              boxShadow: 'inset 0 0 25px rgba(139, 101, 8, 0.8)'
+              background: 'radial-gradient(ellipse at center, #ffe066 0%, #d4af37 45%, #8b6508 100%)',
+              boxShadow: 'inset 0 0 35px rgba(80, 50, 0, 0.9)'
             }}
           >
-            {/* Light sweep effect across the face */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 opacity-60" style={{ animation: 'sweep 5s linear infinite' }} />
+             {/* Sweep Light Effect */}
+            <div className="absolute top-1/2 left-1/2 bg-gradient-to-tr from-transparent via-white/80 to-transparent w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 mix-blend-overlay pointer-events-none" style={{ animation: 'sweep 4s linear infinite' }} />
 
-            {/* Recessed Inner Ring */}
-            <div className="w-36 h-36 rounded-full border border-[#d4af37]/30 flex items-center justify-center shadow-[inset_0_4px_15px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#ffd700]/5 to-[#8b6508]/10 relative z-10">
+            {/* Guilloché Pattern (intricate inner rings) */}
+            <div className="w-[70%] h-[70%] rounded-full border-2 border-[#d4af37]/60 shadow-[inset_0_5px_20px_rgba(0,0,0,0.6)] flex items-center justify-center relative z-10"
+                 style={{ background: 'repeating-radial-gradient(circle at center, transparent 0, transparent 4px, rgba(212,175,55,0.15) 5px, transparent 6px)' }}>
               
               {/* Premium TamaPay "T" Branding */}
               <span 
-                className="text-[5.5rem] font-black tracking-tighter"
+                className="text-[6.5rem] font-black tracking-tighter"
                 style={{
-                  background: 'linear-gradient(135deg, #60a5fa, #a78bfa, #e0e7ff)',
+                  background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #e0e7ff 100%)',
+                  backgroundSize: '200% 200%',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
-                  filter: 'drop-shadow(2px 4px 3px rgba(0,0,0,0.5)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.3))'
+                  filter: 'drop-shadow(3px 6px 5px rgba(0,0,0,0.7)) drop-shadow(-1px -1px 2px rgba(255,255,255,0.6))',
+                  animation: 'holo-shift 3s ease infinite alternate'
                 }}
               >
                 T
@@ -84,29 +89,27 @@ export default function Css3DCoin({ className = '' }: Css3DCoinProps) {
             </div>
           </div>
 
-          {/* Back Face (Flipped to render correctly on the back) */}
+          {/* Back Face */}
           <div 
-            className="absolute inset-0 rounded-full flex items-center justify-center border-[3px] border-[#8b6508] overflow-hidden"
+            className="absolute inset-0 rounded-full flex items-center justify-center border-[4px] border-[#a67c00] overflow-hidden"
             style={{ 
               transform: `translateZ(${-(thickness + 0.5)}px) rotateY(180deg)`, 
-              background: 'radial-gradient(ellipse at center, #ffe066 0%, #d4af37 60%, #a67c00 100%)',
-              boxShadow: 'inset 0 0 25px rgba(139, 101, 8, 0.8)'
+              background: 'radial-gradient(ellipse at center, #ffe066 0%, #d4af37 45%, #8b6508 100%)',
+              boxShadow: 'inset 0 0 35px rgba(80, 50, 0, 0.9)'
             }}
           >
-            {/* Light sweep effect across the face */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 to-white/0 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 opacity-60" style={{ animation: 'sweep 5s linear infinite reverse' }} />
-
-            {/* Recessed Inner Ring */}
-            <div className="w-36 h-36 rounded-full border border-[#d4af37]/30 flex items-center justify-center shadow-[inset_0_4px_15px_rgba(0,0,0,0.3)] bg-gradient-to-br from-[#ffd700]/5 to-[#8b6508]/10 relative z-10">
-              
-              {/* Premium TamaPay "T" Branding */}
+            <div className="absolute top-1/2 left-1/2 bg-gradient-to-tr from-transparent via-white/80 to-transparent w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 mix-blend-overlay pointer-events-none" style={{ animation: 'sweep 4s linear infinite reverse' }} />
+            <div className="w-[70%] h-[70%] rounded-full border-2 border-[#d4af37]/60 shadow-[inset_0_5px_20px_rgba(0,0,0,0.6)] flex items-center justify-center relative z-10"
+                 style={{ background: 'repeating-radial-gradient(circle at center, transparent 0, transparent 4px, rgba(212,175,55,0.15) 5px, transparent 6px)' }}>
               <span 
-                className="text-[5.5rem] font-black tracking-tighter"
+                className="text-[6.5rem] font-black tracking-tighter"
                 style={{
-                  background: 'linear-gradient(135deg, #60a5fa, #a78bfa, #e0e7ff)',
+                  background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #e0e7ff 100%)',
+                  backgroundSize: '200% 200%',
                   WebkitBackgroundClip: 'text',
                   color: 'transparent',
-                  filter: 'drop-shadow(2px 4px 3px rgba(0,0,0,0.5)) drop-shadow(-1px -1px 1px rgba(255,255,255,0.3))'
+                  filter: 'drop-shadow(3px 6px 5px rgba(0,0,0,0.7)) drop-shadow(-1px -1px 2px rgba(255,255,255,0.6))',
+                  animation: 'holo-shift 3s ease infinite alternate'
                 }}
               >
                 T
@@ -117,7 +120,6 @@ export default function Css3DCoin({ className = '' }: Css3DCoinProps) {
         </div>
       </div>
 
-      {/* Animations */}
       <style>{`
         @keyframes spin-y {
           0% { transform: rotateY(0deg); }
@@ -128,8 +130,19 @@ export default function Css3DCoin({ className = '' }: Css3DCoinProps) {
           100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
         @keyframes pulse-shadow {
-          0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-          50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+          0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+          50% { opacity: 0.9; transform: translateX(-50%) scale(1.1); }
+        }
+        @keyframes holo-shift {
+          0% { background-position: 0% 0%; }
+          100% { background-position: 100% 100%; }
+        }
+        @keyframes particle-orbit {
+          0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+          100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-y 20s linear infinite;
         }
       `}</style>
     </div>
