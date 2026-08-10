@@ -1,5 +1,6 @@
 import Css3DCoin from "@/components/Css3DCoin";
 import AnimatedWallet from "@/components/AnimatedWallet";
+import InteractiveLogo from "@/components/InteractiveLogo";
 
 export default function Home() {
   return (
@@ -15,16 +16,21 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-32 w-full mt-10">
+        <div className="flex flex-col md:flex-row flex-wrap items-center justify-center gap-16 md:gap-24 w-full mt-10">
           
           <div className="flex flex-col items-center gap-6">
             <h2 className="text-xl font-mono text-yellow-500 uppercase tracking-widest text-sm">Spinning Coin</h2>
-            <Css3DCoin coinText="₱" />
+            <Css3DCoin />
           </div>
 
           <div className="flex flex-col items-center gap-6">
             <h2 className="text-xl font-mono text-[#a66f43] uppercase tracking-widest text-sm">Interactive Wallet</h2>
             <AnimatedWallet />
+          </div>
+
+          <div className="flex flex-col items-center gap-6 w-full mt-8 md:mt-0">
+            <h2 className="text-xl font-mono text-orange-500 uppercase tracking-widest text-sm">Animated Typography</h2>
+            <InteractiveLogo />
           </div>
 
         </div>
