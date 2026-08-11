@@ -1,11 +1,17 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Css3DCoin from "@/components/Css3DCoin";
 import AnimatedWallet from "@/components/AnimatedWallet";
 import InteractiveLogo from "@/components/InteractiveLogo";
 import GlobalNode from "@/components/GlobalNode";
 import SecureVault from "@/components/SecureVault";
 import AutomatedInvoice from "@/components/AutomatedInvoice";
+
+// Open Source Sections
+import GlobeSection from "@/components/sections/GlobeSection";
+import SecuritySection from "@/components/sections/SecuritySection";
+import MetricsSection from "@/components/sections/MetricsSection";
+import CtaSection from "@/components/sections/CtaSection";
 
 export default function Home() {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
@@ -112,6 +118,13 @@ export default function Home() {
           
         </div>
       </main>
+
+      {/* NEW OPEN-SOURCE ANIMATED SECTIONS */}
+      <GlobeSection />
+      <SecuritySection />
+      <MetricsSection />
+      <CtaSection />
+      
     </div>
   );
 }
