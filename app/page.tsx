@@ -10,6 +10,13 @@ import AutomatedInvoice from "@/components/AutomatedInvoice";
 // Open Source Sections
 import GlobeSection from "@/components/sections/GlobeSection";
 import SecuritySection from "@/components/sections/SecuritySection";
+import CodeBlockSection from "@/components/sections/CodeBlock";
+import StickyScrollSection from "@/components/sections/StickyScroll";
+
+// Extremely Advanced WebGL / Physics Sections
+import LiquidShaderSection from "@/components/sections/LiquidShaderSection";
+import PhysicsDockSection from "@/components/sections/PhysicsDockSection";
+import ScrollExplosionSection from "@/components/sections/ScrollExplosionSection";
 import MetricsSection from "@/components/sections/MetricsSection";
 import CtaSection from "@/components/sections/CtaSection";
 
@@ -118,6 +125,11 @@ export default function Home() {
           
         </div>
       </main>
+
+      {/* AWWWARDS-LEVEL WEBGL SECTIONS */}
+      <LiquidShaderSection />
+      <PhysicsDockSection />
+      <ScrollExplosionSection />
 
       {/* NEW OPEN-SOURCE ANIMATED SECTIONS */}
       <GlobeSection />
